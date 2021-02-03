@@ -1,10 +1,16 @@
 <?php
-include_once(dirname(__DIR__)."/lib/common.php");
-include_once("$ROOT_PATH/api/lib/db_lib.php");
+#####################################################################
+# login
+# 登入取得token
+# Date : 2021-02-02
+#####################################################################
+include_once(dirname(__DIR__)."../../lib/common.php");
+include_once("$ROOT_PATH/lib/db_lib.php");
 $request_data = array(
     'error' => true,
     'msg' => '',
 );
+$api_status = 0;
 $db = new db_lib();
 $response_data = file_get_contents("php://input");
 $response_arr = json_decode($response_data,'true');
@@ -12,7 +18,6 @@ if(!is_array($response_arr)){
     $request_data['msg'] = '資料解析失敗';
     goto end;
 }
-
 $check_data = check_sort_data($response_arr);
 if($check_data['error']){
     $request_data['msg'] = $check_data['msg'];
@@ -27,9 +32,11 @@ $token = getEncodeStr($token_msg);
 $request_data['data'] = array(
     'token' => $token
 );
+$api_status = 1;
 
 
 end:
+    $db->saveApiResult('login',$response_data,$request_data,$api_status);
     echo json_encode($request_data);
 
 function check_sort_data($data){
