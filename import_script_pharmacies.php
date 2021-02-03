@@ -1,6 +1,6 @@
 <?php
-include_once("api/lib/common.php");
-include_once("$ROOT_PATH/api/lib/db_lib.php");
+include_once("lib/common.php");
+include_once("$ROOT_PATH/lib/db_lib.php");
 
 $json_str = file_get_contents('data/pharmacies.json');
 $data_arr = json_decode($json_str, true);
@@ -43,7 +43,7 @@ foreach ($data_arr as  $data) {
             'modifyTime' => date('Y-m-d H:i:s'),
             'createTime' => date('Y-m-d H:i:s'),
         );
-        $pharmacies_id = $db->insertData('kdan_mask_mask_item',$mask_item_data);
+        $db->insertData('kdan_mask_mask_item',$mask_item_data);
     }
 }
 

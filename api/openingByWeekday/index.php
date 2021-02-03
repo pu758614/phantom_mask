@@ -25,9 +25,6 @@ if($check_data['error']){
 }
 $data = isset($check_data['data'])?$check_data['data']:'';
 $opening_list = $db->getOpeningByWeekDay($data['weekDay']);
-echo '<pre>';
-print_r($opening_list);
-echo '</pre>';
 $request_data['error'] = false;
 if(empty($opening_list)){
     $request_data['msg'] = '無營業店家';
