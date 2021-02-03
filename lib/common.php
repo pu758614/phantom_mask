@@ -11,14 +11,12 @@ function checkToken($token){
     $token_arr = explode('_',$str);
     $return =  array(
         'error' => true,
-        'msg'   => '錯誤的格式'
+        'msg'   => '錯誤的token格式'
     );
     if(!isset($token_arr[0])|| $token_arr[0]!='kdan'){
-        echo "aaa";
         return $return;
     }
     if(!isset($token_arr[1])){
-        echo "bbbb";
         return $return;
     }
     if(date('Y-m-d H:i:s')>$token_arr[1]){
@@ -86,4 +84,14 @@ function generate_uuid($separator = '-') {
                         mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
                       );
     }
+}
+
+function CheckDateTime($date_time)
+{
+    if(preg_match('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',$date_time)){
+        $check = true;
+    }else{
+        $check = false;
+    }
+ return $check;
 }
