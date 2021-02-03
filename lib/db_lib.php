@@ -19,6 +19,55 @@ class db_lib {
         $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
     }
 
+    function maskPharmaciesByPriceRange($min,$max){
+        $where_arr = array();
+        echo "$min";
+        $arr = array();
+        if($min !=0 ){
+            $where_arr[] = "price>=?";
+            $arr[] = $min;
+        }
+        if($max !=0 ){
+            $where_arr[] = "price<=?";
+            $arr[] = $max;
+        }
+        $where = implode(' AND ',$where_arr);
+        $arr[] = 0;
+        $mask_item_tb = "`kdan_mask_mask_item`";
+        $sql = "SELECT *  FROM $mask_item_tb WHERE $where AND isDelete=? order by price ASC";
+        $rs = $this->db->Execute($sql,$arr);
+        $data = $pharm_tmp =array();
+        if($rs && $rs->RecordCount() > 0){
+            foreach ($rs as $mask_item) {
+                if(!isset($data[$mask_item['pharmaciesId']])){
+                    $pharm_data = $this->getSingleById('kdan_mask_pharmacies','id',$mask_item['pharmaciesId']);
+                    if(empty($pharm_data)){
+                        echo '<pre>';
+                        print_r($pharm_data);
+                        echo '</pre>';
+                    }
+                    $pharm_tmp[$mask_item['pharmaciesId']] = $pharm_data;
+                    $data[$mask_item['pharmaciesId']] = array(
+                        'pharmaciesUUID' => $pharm_data['uuid'],
+                        'name' => $pharm_data['name'],
+                    );
+                }else{
+                    $pharm_data = $pharm_tmp[$mask_item['pharmaciesId']];
+                }
+                $name = $mask_item['name'];
+                $color= $mask_item['color'];
+                $per= $mask_item['per'];
+                $data[$mask_item['pharmaciesId']]['maskList'][] = array(
+                    'maskUUID' => $mask_item['uuid'],
+                    'price' => $mask_item['price'],
+                    'name'  => "$name ($color) ($per per pack)",
+                );
+            }
+            $data = array_values($data);
+        }
+        return $data;
+    }
+
 
     function getOpeningByWeekDay($week_day){
         $start_field = $week_day."TimeStart";
