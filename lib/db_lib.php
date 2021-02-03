@@ -20,6 +20,24 @@ class db_lib {
     }
 
 
+    function getOpeningByWeekDay($week_day){
+        $start_field = $week_day."TimeStart";
+        $end_field = $week_day."TimeEnd";
+        $table_name = "`kdan_mask_pharmacies`";
+        $sql = "SELECT uuid,
+                       name,
+                       $start_field as  start_time,
+                       $end_field as end_time
+                FROM $table_name
+                WHERE  $start_field!=? AND $end_field!=?";
+        $rs = $this->db->Execute($sql,array('00:00:00','00:00:00'));
+        if($rs && $rs->RecordCount() > 0){
+            return $rs->getAll();
+        }else{
+            return array();
+        }
+    }
+
     function getOpeningByDateTime($data){
         $week_en_change = array(
             '0' => 'Sun',
