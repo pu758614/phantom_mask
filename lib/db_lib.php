@@ -19,6 +19,39 @@ class db_lib {
         $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
     }
 
+    function searchMaskPharmacies($keyword,$cond){
+        $tb_mask_item = "`kdan_mask_mask_item`";
+        $tb_pharmacies = "`kdan_mask_pharmacies`";
+        $search_data = array();
+        if($cond == 'mask'){
+            $sql = "SELECT  $tb_mask_item.fullName as maskName,
+                            $tb_mask_item.uuid as maskUUID,
+                            $tb_pharmacies.name as pharmaciesName,
+                            $tb_pharmacies.uuid as pharmaciesUUID
+                    FROM $tb_mask_item
+                    LEFT JOIN $tb_pharmacies
+                    ON $tb_mask_item.pharmaciesId = $tb_pharmacies.id
+                    WHERE $tb_mask_item.fullName LIKE ? AND isDelete=?
+                    order by $tb_mask_item.fullName ASC
+            ";
+            $rs = $this->db->Execute($sql,array("%$keyword%",'0'));
+            if($rs && $rs->RecordCount() > 0){
+                $search_data = $rs->getAll();
+            }
+        }else{
+            $sql = "SELECT uuid,name
+                    FROM $tb_pharmacies
+                    WHERE name LIKE ?
+                    order by name ASC";
+            $rs = $this->db->Execute($sql,array("%$keyword%"));
+            if($rs && $rs->RecordCount() > 0){
+                $search_data = $rs->getAll();
+            }
+        }
+        return $search_data;
+    }
+
+
     function maskPharmaciesByPriceRange($min,$max){
         $where_arr = array();
         $arr = array();
