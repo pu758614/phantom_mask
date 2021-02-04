@@ -21,7 +21,6 @@ class db_lib {
 
     function maskPharmaciesByPriceRange($min,$max){
         $where_arr = array();
-        echo "$min";
         $arr = array();
         if($min !=0 ){
             $where_arr[] = "price>=?";
@@ -41,11 +40,6 @@ class db_lib {
             foreach ($rs as $mask_item) {
                 if(!isset($data[$mask_item['pharmaciesId']])){
                     $pharm_data = $this->getSingleById('kdan_mask_pharmacies','id',$mask_item['pharmaciesId']);
-                    if(empty($pharm_data)){
-                        echo '<pre>';
-                        print_r($pharm_data);
-                        echo '</pre>';
-                    }
                     $pharm_tmp[$mask_item['pharmaciesId']] = $pharm_data;
                     $data[$mask_item['pharmaciesId']] = array(
                         'pharmaciesUUID' => $pharm_data['uuid'],
@@ -73,7 +67,7 @@ class db_lib {
         $start_field = $week_day."TimeStart";
         $end_field = $week_day."TimeEnd";
         $table_name = "`kdan_mask_pharmacies`";
-        $sql = "SELECT uuid,
+        $sql = "SELECT uuid as pharmaciesUUID,
                        name,
                        $start_field as  start_time,
                        $end_field as end_time
@@ -103,7 +97,7 @@ class db_lib {
         $end_field = $week_en."TimeEnd";
         $data_arr = explode(' ',$data);
         $table_name = "`kdan_mask_pharmacies`";
-        $sql = "SELECT uuid,
+        $sql = "SELECT uuid  as pharmaciesUUID,
                        name,
                        $start_field as  start_time,
                        $end_field as end_time
