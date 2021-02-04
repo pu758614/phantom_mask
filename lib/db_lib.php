@@ -20,7 +20,11 @@ class db_lib {
     }
 
     function updateMaskFullName($id){
-        $mask_data = $this->getSingleById('kdan_mask_mask_item','id',$id);
+        $cond = array(
+            'id' => $id,
+            'isDelete' => 0
+        );
+        $mask_data = $this->getSingleByArray('kdan_mask_mask_item',$cond);
         if(empty($mask_data)){
             return false;
         }
@@ -204,7 +208,7 @@ class db_lib {
         }
     }
 
-    function saveApiResult($action,$response,$request,$status){
+    function saveApiResult($action,$request,$response,$status){
         if(is_array($response)){
             $response = json_encode($response,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
@@ -214,8 +218,8 @@ class db_lib {
         $data =array(
             'action'     => $action,
             'ip'         => $_SERVER['REMOTE_ADDR'],
-            'request'    => $response,
-            'response'   => $request,
+            'request'    => $request,
+            'response'   => $response,
             'status'     => $status,
             'createTime' => date('Y-m-d H:i:s')
         );

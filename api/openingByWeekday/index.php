@@ -12,24 +12,24 @@ $request_data = array(
 );
 $api_status = 0;
 $db = new db_lib();
-$response_data = file_get_contents("php://input");
-$response_arr = json_decode($response_data,'true');
-if(!is_array($response_arr)){
-    $request_data['msg'] = '資料解析失敗';
+$request_data = file_get_contents("php://input");
+$request_arr = json_decode($request_data,'true');
+if(!is_array($request_arr)){
+    $response_data['msg'] = '資料解析失敗';
     goto end;
 }
-$check_data = check_sort_data($response_arr);
+$check_data = check_sort_data($request_arr);
 if($check_data['error']){
-    $request_data['msg'] = $check_data['msg'];
+    $response_data['msg'] = $check_data['msg'];
     goto end;
 }
 $data = isset($check_data['data'])?$check_data['data']:'';
 $opening_list = $db->getOpeningByWeekDay($data['weekDay']);
-$request_data['error'] = false;
+$response_data['error'] = false;
 if(empty($opening_list)){
-    $request_data['msg'] = '無營業店家';
+    $response_data['msg'] = '無營業店家';
 }else{
-    $request_data['data'] = $opening_list;
+    $response_data['data'] = $opening_list;
 }
 $api_status = 1;
 goto end;
@@ -37,8 +37,8 @@ goto end;
 
 
 end:
-    $db->saveApiResult('openingByWeekday',$response_data,$request_data,$api_status);
-    echo json_encode($request_data,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    $db->saveApiResult('openingByWeekday',$request_data,$response_data,$api_status);
+    echo json_encode($response_data,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 
 function check_sort_data($response){

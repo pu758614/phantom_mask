@@ -12,22 +12,22 @@ $request_data = array(
 );
 $api_status = 0;
 $db = new db_lib();
-$response_data = file_get_contents("php://input");
-$response_arr = json_decode($response_data,'true');
-if(!is_array($response_arr)){
-    $request_data['msg'] = '資料解析失敗';
+$request_data = file_get_contents("php://input");
+$request_arr = json_decode($request_data,'true');
+if(!is_array($request_arr)){
+    $response_data['msg'] = '資料解析失敗';
     goto end;
 }
-$check_data = check_sort_data($response_arr);
+$check_data = check_sort_data($request_arr);
 if($check_data['error']){
-    $request_data['msg'] = $check_data['msg'];
+    $response_data['msg'] = $check_data['msg'];
     goto end;
 }
 
 $data = isset($check_data['data'])?$check_data['data']:array();
 $pharmacies_data = $db->getSingleById('kdan_mask_pharmacies','uuid',$data['pharmaciesUUID']);
 if(empty($pharmacies_data)){
-    $request_data['msg'] = '錯誤的pharmaciesUUID';
+    $response_data['msg'] = '錯誤的pharmaciesUUID';
     goto end;
 }
 
@@ -48,11 +48,11 @@ foreach ($mask_list as $mask_data) {
     );
 }
 
-$request_data['error'] = false;
+$response_data['error'] = false;
 if(empty($data_list)){
-    $request_data['msg'] = '此藥局無口罩資料';
+    $response_data['msg'] = '此藥局無口罩資料';
 }else{
-    $request_data['data'] = $data_list;
+    $response_data['data'] = $data_list;
 }
 $api_status = 1;
 goto end;
@@ -61,7 +61,7 @@ goto end;
 
 end:
     $db->saveApiResult('maskItemByPharmacies',$response_data,$request_data,$api_status);
-    echo json_encode($request_data,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    echo json_encode($response_data,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 
 function check_sort_data($response){
