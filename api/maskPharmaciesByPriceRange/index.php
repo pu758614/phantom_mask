@@ -39,7 +39,7 @@ goto end;
 
 
 end:
-    $db->saveApiResult('openingByWeekday',$response_data,$request_data,$api_status);
+    $db->saveApiResult('maskPharmaciesByPriceRange',$response_data,$request_data,$api_status);
     echo json_encode($request_data,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 
