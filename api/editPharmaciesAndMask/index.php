@@ -29,10 +29,17 @@ $data = isset($check_data['data'])?$check_data['data']:'';
 
 if($data['editType']=='pharmacies'){
     $table = 'kdan_mask_pharmacies';
+    $cond = array(
+        'uuid' => $data['uuid']
+    );
 }else{
     $table = 'kdan_mask_mask_item';
+    $cond = array(
+        'uuid' => $data['uuid'],
+        'isDelete' => 0
+    );
 }
-$check_data = $db->getSingleById($table,'uuid',$data['uuid']);
+$check_data = $db->getSingleByArray($table,$cond);
 if(empty($check_data)){
     $response_data['msg'] = '無此uuid資料';
     goto end;
@@ -50,12 +57,14 @@ if(!$result || $db->db->ErrorMsg()!=''){
     if($data['editType']=='mask'){
         if($db->updateMaskFullName($check_data['id'])){
             $response_data['msg'] = '更新成功';
+            $response_data['error'] = false;
             $api_status = 1;
         }else{
             $response_data['msg'] = '口罩名稱更新失敗';
         }
     }else{
         $response_data['msg'] = '更新成功';
+        $response_data['error'] = false;
         $api_status = 1;
     }
 }
