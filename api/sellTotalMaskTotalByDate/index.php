@@ -33,6 +33,8 @@ if(empty($get_data)){
     $response_data['msg'] = '無搜尋資料';
 }else{
     $response_data['data'] = $get_data;
+    $response_data['error'] = false;
+    $api_status = 1;
 }
 
 end:
