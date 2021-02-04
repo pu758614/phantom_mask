@@ -86,12 +86,19 @@ function generate_uuid($separator = '-') {
     }
 }
 
-function CheckDateTime($date_time)
-{
-    if(preg_match('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',$date_time)){
-        $check = true;
+function CheckDateTime($date_time){
+    if(strlen($date_time) ==10){
+        if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date_time)){
+            $check = true;
+        }else{
+            $check = false;
+        }
     }else{
-        $check = false;
+        if(preg_match('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',$date_time)){
+            $check = true;
+        }else{
+            $check = false;
+        }
     }
  return $check;
 }

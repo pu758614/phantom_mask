@@ -19,6 +19,28 @@ class db_lib {
         $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
     }
 
+
+    function sellTotalTopByDate($count,$startDate,$endDate){
+        $tb_sell_record = "`kdan_mask_sell_record`";
+        $tb_user = "`kdan_mask_user`";
+        $sql = "SELECT $tb_user.name,
+                        $tb_user.uuid as userUUID,
+                        ROUND(sum($tb_sell_record.`sellAmount`),2) as total
+                FROM $tb_sell_record
+                LEFT JOIN $tb_user
+                ON $tb_sell_record.userId = $tb_user.id
+                WHERE $tb_sell_record.sellDate >= ? AND $tb_sell_record.sellDate<= ?
+                group by $tb_user.name
+                order by total DESC
+                limit $count";
+        $rs = $this->db->Execute($sql,array($startDate,$endDate));
+        $data = array();
+        if($rs && $rs->RecordCount() > 0){
+            $data = $rs->getAll();
+        }
+        return $data;
+    }
+
     function searchMaskPharmacies($keyword,$cond){
         $tb_mask_item = "`kdan_mask_mask_item`";
         $tb_pharmacies = "`kdan_mask_pharmacies`";
