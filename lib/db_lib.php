@@ -19,6 +19,28 @@ class db_lib {
         $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
     }
 
+    function updateMaskFullName($id){
+        $mask_data = $this->getSingleById('kdan_mask_mask_item','id',$id);
+        if(empty($mask_data)){
+            return false;
+        }
+        $neme      = $mask_data['name'];
+        $color     = $mask_data['color'];
+        $per       = $mask_data['per'];
+        $full_name = "$neme ($color) ($per per pack)";
+        $data = array(
+            'fullName' => $full_name,
+            'modifyTime' => date('Y-m-d H:i:s')
+        );
+        $result = $this->updateData('kdan_mask_mask_item',$data,array('id'=>$id));
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     function sellTotalMaskTotalByDate($startDate,$endDate){
         $tb_sell_record = "`kdan_mask_sell_record`";
         $sql = "SELECT sum(per) as maskTotal ,
