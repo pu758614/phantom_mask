@@ -19,6 +19,22 @@ class db_lib {
         $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
     }
 
+    function sellTotalMaskTotalByDate($startDate,$endDate){
+        $tb_sell_record = "`kdan_mask_sell_record`";
+        $sql = "SELECT sum(per) as maskTotal ,
+                       ROUND(sum(sellAmount),2) as amountTotal
+                FROM $tb_sell_record
+                WHERE sellDate>=? AND sellDate<= ?";
+        $rs = $this->db->Execute($sql,array($startDate,$endDate));
+        $data = array(
+            'maskTotal' => 0,
+            'amountTotal' => 0,
+        );
+        if($rs && $rs->RecordCount() > 0){
+            $data = $rs->FetchRow();
+        }
+        return $data;
+    }
 
     function sellTotalTopByDate($count,$startDate,$endDate){
         $tb_sell_record = "`kdan_mask_sell_record`";
