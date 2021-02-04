@@ -34,14 +34,15 @@ foreach ($data_arr as  $data) {
     foreach ($masks as $key => $mask) {
         $opening_data_arr = masksChange($mask['name']);
         $mask_item_data = array(
-            'uuid' => generate_uuid(),
+            'uuid'         => generate_uuid(),
             'pharmaciesId' => $pharmacies_id,
-            'name' => $opening_data_arr['name'],
-            'color' => $opening_data_arr['color'],
-            'per' => $opening_data_arr['per'],
-            'price' => $mask['price'],
-            'modifyTime' => date('Y-m-d H:i:s'),
-            'createTime' => date('Y-m-d H:i:s'),
+            'name'         => $opening_data_arr['name'],
+            'color'        => $opening_data_arr['color'],
+            'per'          => $opening_data_arr['per'],
+            'price'        => $mask['price'],
+            'fullName'     => $mask['name'],
+            'modifyTime'   => date('Y-m-d H:i:s'),
+            'createTime'   => date('Y-m-d H:i:s'),
         );
         $db->insertData('kdan_mask_mask_item',$mask_item_data);
     }
@@ -50,13 +51,13 @@ foreach ($data_arr as  $data) {
 
 function masksChange($masks){
     $masksArr = explode('(', $masks);
-    $name = trim($masksArr[0]);
+    $name  = trim($masksArr[0]);
     $color = str_replace(')', '', $masksArr[1]);
     $pre = str_replace(' per pack)', '', $masksArr[2]);
     return array(
-        'name' => trim($name),
+        'name'  => trim($name),
         'color' => trim($color),
-        'per' => trim($pre),
+        'per'   => trim($pre),
     );
 }
 

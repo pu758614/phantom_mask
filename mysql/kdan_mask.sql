@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `kdan_mask_mask_item` (
   `color` varchar(16) NOT NULL COMMENT '顏色',
   `per` int(11) unsigned NOT NULL COMMENT '幾片裝',
   `price` float unsigned NOT NULL COMMENT '價格',
+  `fullName` varchar(64) NOT NULL DEFAULT '' COMMENT '完整名稱',
   `isDelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '已刪除',
   `modifyTime` datetime NOT NULL COMMENT '異動時間',
   `createTime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '建立時間',
