@@ -1,4 +1,5 @@
 <?php
+ini_set('display_errors','1');
 $ini_list = parse_ini_file('conf.ini', true, INI_SCANNER_RAW);
 $data_base = isset($ini_list['system'])?$ini_list['system']:array();
 $ROOT_PATH = isset($data_base['root_path'])?$data_base['root_path']:'';
@@ -32,7 +33,7 @@ function checkToken($token){
 
 function getEncodeStr($str){
     $hashKey4encode = '758614';
-    if ( version_compare( phpversion() , '7.0.0', '>=') ) {
+    if ( version_compare( phpversion() , '7.1.0', '<') ) {
         $str = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, PadKeyLength($hashKey4encode), $str, MCRYPT_MODE_CBC, md5($hashKey4encode)));
     }else{
         $str = openssl_encrypt($str,'des-ede3',PadKeyLength($hashKey4encode),0);
@@ -45,10 +46,10 @@ function getEncodeStr($str){
 function getDecodeStr($str){
     $hashKey4encode = '758614';
     $str = str_replace(array('-', '_'), array('+', '/'), $str);
-    if ( version_compare( phpversion() , '7.0.0', '>=') ) {
+    if ( version_compare( phpversion() , '7.1.0', '<') ) {
         $str = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, PadKeyLength($hashKey4encode), base64_decode($str), MCRYPT_MODE_CBC, md5($hashKey4encode));
     }else{
-        $str = openssl_decrypt($str,'des-ede3',oaksPadKeyLength($hashKey4encode),0);
+        $str = openssl_decrypt($str,'des-ede3',PadKeyLength($hashKey4encode),0);
     }
     return trim($str);
 }
