@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `kdan_mask_mask_item` (
   `fullName` varchar(64) NOT NULL DEFAULT '' COMMENT '完整名稱',
   `isDelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '已刪除',
   `modifyTime` datetime NOT NULL COMMENT '異動時間',
-  `createTime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '建立時間',
+  `createTime` datetime NOT NULL COMMENT '建立時間',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_uuid_pharmaciesId_cloro_per` (`id`,`uuid`,`pharmaciesId`,`color`,`per`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `kdan_mask_pharmacies` (
   `SunTimeStart` time DEFAULT NULL COMMENT '禮拜日開始時間',
   `SunTimeEnd` time DEFAULT NULL COMMENT '禮拜日結束時間',
   `modifyTime` datetime NOT NULL COMMENT '異動時間',
-  `createTime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '建立時間',
+  `createTime` datetime NOT NULL   COMMENT '建立時間',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `kdan_mask_sell_record` (
   `per` int(6) unsigned NOT NULL COMMENT '口罩幾片裝',
   `sellAmount` float unsigned NOT NULL COMMENT '口罩價格',
   `sellDate` datetime NOT NULL COMMENT '購買時間',
-  `createTime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '建立時間',
+  `createTime` datetime NOT NULL   COMMENT '建立時間',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
