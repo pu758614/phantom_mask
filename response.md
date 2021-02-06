@@ -1,20 +1,20 @@
 # Response
 ## API Document (required)
-  ### 1. LOGIN
-  ##### POST URL:
+### 1. LOGIN
+##### POST URL
   `https://bibleline2.herokuapp.com/phantom_mask/api/login/index.php`
-  ##### Request json:
+##### Request json
 ```json
 {"login_name":"kdan"}
 ```
-  #####Description
+##### Description
    * login_name : input「kdan」
 
 
-  ##### Response json:
+##### Response json
 ```json
 {
-    "error": true,
+    "error": fasle,
     "msg": "",
     "data": {
         "token": "1YqCxzvO0sCujpO6bsiRqTv2ZvEsTuI6By0_-UhIvss"
@@ -25,9 +25,9 @@
 
 
   ### 2. List all pharmacies that are open at a certain datetime
-  ##### POST URL:
+##### POST URL
   `https://bibleline2.herokuapp.com/phantom_mask/api/openingByDateTime/index.php`
-   ##### Request:
+##### Request
    ```json
 {
 		"token": "{{TOKEN}}",
@@ -37,13 +37,13 @@
 }
 ```
 
-  #####Description
+##### Description
    * token : Token obtained by login
    * data
      * dateTime : search date time
 
 
-   ##### Response:
+##### Response
    ```json
 {
     "error": false,
@@ -73,9 +73,9 @@
 
 
   ### 3. List all pharmacies that are open on a day of the week, at a certain time
-  ##### POST URL:
+##### POST URL
   `https://bibleline2.herokuapp.com/phantom_mask/api/openingByWeekday/index.php`
-   ##### Request json:
+##### Request json
    ```json
 {
 	"token": "{{TOKEN}}",
@@ -85,13 +85,13 @@
 }
 ```
 
-  #####Description
+##### Description
    * token : Token obtained by login
    * data
      * weekDay : search day.(Mon or Tue or Wed or Thu or Fri or Sat or Sun)
 
 
-##### Response:
+##### Response
    ```json
 {
     "error": false,
@@ -116,9 +116,9 @@
 }
 ```
 ### 4. List all masks that are sold by a given pharmacy, sorted by mask name or mask price
-  ##### POST URL:
+##### POST URL:
   `https://bibleline2.herokuapp.com/phantom_mask/api/maskItemByPharmacies/index.php`
-   ##### Request json:
+##### Request json
    ```json
 {
 	"token": "{{TOKEN}}",
@@ -129,13 +129,13 @@
 }
 ```
 
-  #####Description
+##### Description
    * token : Token obtained by login
    * data
      * pharmaciesUUID : search pharmacies UUID.
 	 * sort: sort by.('name' or 'price')
 
-##### Response json:
+##### Response json
    ```json
 {
     "error": false,
@@ -166,9 +166,9 @@
 
 
 ### 5. List all pharmacies that have more or less than x mask products within a price range
-  ##### POST URL:
+##### POST URL:
   `https://bibleline2.herokuapp.com/phantom_mask/api/maskPharmaciesByPriceRange/index.php`
-   ##### Request json:
+##### Request json
 ```json
 {
     "token": "{{TOKEN}}",
@@ -178,14 +178,14 @@
     }
 }
 ```
-  #####Description
+##### Description
    * token : Token obtained by login.
    * data
      * minPrice : Price min value.
 	 * maxPrice: Price max value.
 
 
-##### Response json:
+##### Response json
    ```json
 {
     "error": false,
@@ -230,7 +230,7 @@
 ### 6. Search for pharmacies or masks by name, ranked by relevance to search term
   ##### POST URL:
   `https://bibleline2.herokuapp.com/phantom_mask/api/searchMaskPharmacies/index.php`
-   ##### Request json:
+   ##### Request json
    ```json
 {
 	"token": "{{TOKEN}}",
@@ -242,13 +242,13 @@
 ```
 
 
-  #####Description
+##### Description
    * token : Token obtained by login
    * data
      * condition : search condition(mask or pharmacies)
 	 * keyword: search keyword
 
-##### Response json:
+##### Response json
    ```json
 condition is pharmacies:
 {
@@ -296,7 +296,7 @@ condition is pharmacies:
 ### 7.The top x users by total transaction amount of masks within a date range
   ##### POST URL:
   `https://bibleline2.herokuapp.com/phantom_mask/api/sellTotalTopByDate/index.php`
-   ##### Request json:
+   ##### Request json
 ```json
 {
     "token": "{{TOKEN}}",
@@ -315,7 +315,7 @@ condition is pharmacies:
 	 * startDate: Search end date.
 
 
-   ##### Response json:
+   ##### Response json
 ```json
 {
     "error": false,
@@ -338,7 +338,7 @@ condition is pharmacies:
 ### 8. The total amount of masks and dollar value of transactions that happened within a date range
   ##### POST URL:
 `https://bibleline2.herokuapp.com/phantom_mask/api/sellTotalMaskTotalByDate/index.php`
-   ##### Request json:
+   ##### Request json
 ```json
 {
     "token": "{{TOKEN}}",
@@ -348,17 +348,17 @@ condition is pharmacies:
     }
 }
 ```
-  #####Description
+  ##### Description
    * token : Token obtained by login.
    * data
 	 * startDate: Search start date.
 	 * startDate: Search end date.
 
 
-  ##### Response json:
+  ##### Response json
 ```json
 {
-    "error": true,
+    "error": false,
     "msg": "",
     "data": {
         "maskTotal": "197",
@@ -370,9 +370,9 @@ condition is pharmacies:
 
 
 ### 9. Edit pharmacy name, mask name, and mask price
-  ##### POST URL:
+  ##### POST URL
 `https://bibleline2.herokuapp.com/phantom_mask/api/editPharmaciesAndMask/index.php`
-   ##### Request json:
+   ##### Request json
 ```json
 mask:
 {
@@ -400,7 +400,7 @@ pharmacies:
 }
 ```
 
-  #####Description
+  ##### Description
    * token : Token obtained by login.
    * data
 	 * editType: Edit item type(pharmacies or mask)
@@ -410,7 +410,7 @@ pharmacies:
 	   *  price : Edit mask price( If the editType is a mask)
 
 
-  ##### Response json:
+  ##### Response json
 ```json
 {
     "error": false,
@@ -422,7 +422,7 @@ pharmacies:
 ### 10. Remove a mask product from a pharmacy given by mask name
   ##### POST URL:
 `https://bibleline2.herokuapp.com/phantom_mask/api/deleteMask/index.php`
-   ##### Request json:
+   ##### Request json
 ```json
 {
     "token": "{{TOKEN}}",
@@ -432,14 +432,14 @@ pharmacies:
     }
 }
 ```
-  #####Description
+  ##### Description
    * token : Token obtained by login.
    * data
 	 * pharmaciesUUID: The pharmacy uuid to which the mask belongs.
 	 * maskName: Mask name.
 
 
-  ##### Response json:
+  ##### Response json
 ```json
 {
     "error": false,
@@ -450,7 +450,7 @@ pharmacies:
 ### 11. Process a user purchases a mask from a pharmacy, and handle all relevant data changes in an atomic transaction
   ##### POST URL:
 `https://bibleline2.herokuapp.com/phantom_mask/api/userBuyMask/index.php`
-   ##### Request json:
+   ##### Request json
 ```json
 {
     "token": "{{TOKEN}}",
@@ -460,14 +460,14 @@ pharmacies:
     }
 }
 ```
-  #####Description
+  ##### Description
    * token : Token obtained by login.
    * data
 	 * userUUID: User uuid.
 	 * maskUUID: Mask uuid.
 
 
-  ##### Response json:
+  ##### Response json
 ```json
 {
     "error": false,
