@@ -43,7 +43,8 @@ foreach ($mask_list as $mask_data) {
     $color = $mask_data['color'];
     $per = $mask_data['per'];
     $data_list[] = array(
-        'name' => "$name ($color) ($per per pack)",
+        'maskUUID' => $mask_data['uuid'],
+        'maskName' => "$name ($color) ($per per pack)",
         "price" => $mask_data['price']
     );
 }

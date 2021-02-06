@@ -6,7 +6,7 @@
 #####################################################################
 include_once(dirname(__DIR__)."../../lib/common.php");
 include_once("$ROOT_PATH/lib/db_lib.php");
-$request_data = array(
+$response_data = array(
     'error' => true,
     'msg' => '',
 );

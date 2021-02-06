@@ -32,6 +32,7 @@ $token = getEncodeStr($token_msg);
 $request_data['data'] = array(
     'token' => $token
 );
+$request_data['error'] = false;
 $api_status = 1;
 
 

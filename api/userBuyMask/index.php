@@ -48,7 +48,7 @@ if(empty($mask_dsta)){
     goto end;
 }
 if($user_data['cashBalance']<$mask_dsta['price']){
-    $response_data['msg'] = '使用者金錢不足';
+    $response_data['msg'] = 'User insufficient money';
     goto end;
 }
 $db->db->beginTrans();
@@ -60,7 +60,7 @@ $data = array(
 $result = $db->updateData('kdan_mask_user',$data,array("id"=>$user_data['id']));
 
 if(!$result){
-    $response_data['msg'] = 'user更新失敗';
+    $response_data['msg'] = 'user update fail.';
     $db->db->rollbackTrans();
     goto end;
 }
@@ -74,7 +74,7 @@ $data = array(
 $result = $db->updateData('kdan_mask_pharmacies',$data,array("id"=>$pharmacies_data['id']));
 
 if(!$result){
-    $response_data['msg'] = 'pharmacies更新失敗';
+    $response_data['msg'] = 'Pharmacies update fail.';
     $db->db->rollbackTrans();
     goto end;
 }
@@ -96,7 +96,7 @@ if(!$result){
 }
 $db->db->commitTrans();
 $api_status = 1;
-$response_data['msg'] = "交易成功";
+$response_data['msg'] = "Transaction finish";
 $response_data['error'] = false;
 
 end:

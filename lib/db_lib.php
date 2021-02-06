@@ -65,7 +65,7 @@ class db_lib {
     function sellTotalTopByDate($count,$startDate,$endDate){
         $tb_sell_record = "`kdan_mask_sell_record`";
         $tb_user = "`kdan_mask_user`";
-        $sql = "SELECT $tb_user.name,
+        $sql = "SELECT $tb_user.name as userName,
                         $tb_user.uuid as userUUID,
                         ROUND(sum($tb_sell_record.`sellAmount`),2) as total
                 FROM $tb_sell_record
@@ -103,7 +103,8 @@ class db_lib {
                 $search_data = $rs->getAll();
             }
         }else{
-            $sql = "SELECT uuid,name
+            $sql = "SELECT uuid as pharmaciesUUID,
+                           name as pharmaciesName
                     FROM $tb_pharmacies
                     WHERE name LIKE ?
                     order by name ASC";
@@ -140,7 +141,7 @@ class db_lib {
                     $pharm_tmp[$mask_item['pharmaciesId']] = $pharm_data;
                     $data[$mask_item['pharmaciesId']] = array(
                         'pharmaciesUUID' => $pharm_data['uuid'],
-                        'name' => $pharm_data['name'],
+                        'pharmaciesName' => $pharm_data['name'],
                     );
                 }else{
                     $pharm_data = $pharm_tmp[$mask_item['pharmaciesId']];
@@ -150,8 +151,8 @@ class db_lib {
                 $per= $mask_item['per'];
                 $data[$mask_item['pharmaciesId']]['maskList'][] = array(
                     'maskUUID' => $mask_item['uuid'],
-                    'price' => $mask_item['price'],
-                    'name'  => "$name ($color) ($per per pack)",
+                    'maskPrice' => $mask_item['price'],
+                    'maskName'  => "$name ($color) ($per per pack)",
                 );
             }
             $data = array_values($data);
@@ -165,9 +166,9 @@ class db_lib {
         $end_field = $week_day."TimeEnd";
         $table_name = "`kdan_mask_pharmacies`";
         $sql = "SELECT uuid as pharmaciesUUID,
-                       name,
-                       $start_field as  start_time,
-                       $end_field as end_time
+                       name as pharmaciesName,
+                       $start_field as  startTime,
+                       $end_field as endTime
                 FROM $table_name
                 WHERE  $start_field!=? AND $end_field!=?";
         $rs = $this->db->Execute($sql,array('00:00:00','00:00:00'));
@@ -195,9 +196,9 @@ class db_lib {
         $data_arr = explode(' ',$data);
         $table_name = "`kdan_mask_pharmacies`";
         $sql = "SELECT uuid  as pharmaciesUUID,
-                       name,
-                       $start_field as  start_time,
-                       $end_field as end_time
+                       name as pharmaciesName,
+                       $start_field as  startTime,
+                       $end_field as endTime
                 FROM $table_name
                 WHERE  $start_field<? AND $end_field>?";
         $rs = $this->db->Execute($sql,array($data_arr[1],$data_arr[1]));

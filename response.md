@@ -14,7 +14,7 @@
 ##### Response json
 ```json
 {
-    "error": fasle,
+    "error": false,
     "msg": "",
     "data": {
         "token": "1YqCxzvO0sCujpO6bsiRqTv2ZvEsTuI6By0_-UhIvss"
