@@ -61,10 +61,6 @@
             "start_time": "01:39:00",
             "end_time": "16:59:00"
         },
-        .
-		.
-		.
-
     ]
 }
 ```
@@ -94,7 +90,7 @@
 ##### Response
    ```json
 {
-    "error": false,
+  "error": false,
 	"msg": "",
     "data": [
         {
@@ -109,9 +105,6 @@
             "start_time": "11:00:00",
             "end_time": "14:48:00"
         },
-        .
-		.
-		.
     ]
 }
 ```
