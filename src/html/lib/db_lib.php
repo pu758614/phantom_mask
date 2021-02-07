@@ -20,6 +20,38 @@ class db_lib {
         $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
     }
 
+
+    function getAllSell($type='user'){
+        $sell_record_tb = "`kdan_mask_sell_record`";
+        $pharmacies_tb = "`kdan_mask_pharmacies`";
+        $sql = "SELECT $sell_record_tb.name as maskName,
+                       $sell_record_tb.color,
+                       $sell_record_tb.per,
+                       $sell_record_tb.sellAmount,
+                       $sell_record_tb.userId,
+                       $sell_record_tb.pharmaciesId,
+                       $sell_record_tb.sellDate,
+                       $pharmacies_tb.name as pharmaciesName
+                FROM $sell_record_tb
+                LEFT JOIN $pharmacies_tb
+                ON $sell_record_tb.pharmaciesId = $pharmacies_tb.id
+                order by $sell_record_tb.sellDate DESC";
+        $rs = $this->db->Execute($sql);
+        $sort_arr = array();
+        if($rs && $rs->RecordCount() > 0){
+            foreach ($rs as  $value) {
+                $sort_arr[$value[$type.'Id']][] = array(
+                    "name"       => $value['maskName']." (".$value['color'].") "."(".$value['per']." per)",
+                    "pharmacies" => $value['pharmaciesName'],
+                    "amounts"    => $value['sellAmount'],
+                    "time"       => $value['sellDate']
+                );
+            }
+        }
+        return $sort_arr;
+    }
+
+
     function updateMaskFullName($id){
         $cond = array(
             'id' => $id,

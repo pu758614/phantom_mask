@@ -16,7 +16,11 @@
         <tbody>
             <tr>
                 <td>1. login:<p>
-                    <textarea name="" id="login_json" cols="30" rows="10">{"login_name":"kdan"}</textarea>
+                    <textarea name="" id="login_json" cols="30" rows="10">
+{
+    "login_name":"kdan"
+}
+                    </textarea>
                 </td>
                 <td>
                     <pre id='login_response'>
@@ -50,9 +54,9 @@
                 <td>3.List all pharmacies that are open on a day of the week, at a certain time<p>
                     <textarea name="" id="openingByWeekday_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN  }",
     "data":{
-            "dateTime" : "2021-02-07 12:12:20"
+            "weekDay" : "Mon"
     }
 }
                     </textarea>
@@ -70,7 +74,7 @@
                 <td>4.List all masks that are sold by a given pharmacy, sorted by mask name or mask price<p>
                     <textarea name="" id="maskItemByPharmacies_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "pharmaciesUUID" : "1adc6ab2-afbe-4428-a7e5-ca28c593969b" ,
             "sort"  : "name"
@@ -91,7 +95,7 @@
                 <td>5.List all pharmacies that have more or less than x mask products within a price range<p>
                     <textarea name="" id="maskPharmaciesByPriceRange_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "minPrice" : "20" ,
             "maxPrice"  : "30"
@@ -112,7 +116,7 @@
                 <td>6.Search for pharmacies or masks by name, ranked by relevance to search term<p>
                     <textarea name="" id="searchMaskPharmacies_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "condition" : "mask" ,
             "keyword"  : "Ani"
@@ -133,7 +137,7 @@
                 <td>7.The top x users by total transaction amount of masks within a date range<p>
                     <textarea name="" id="sellTotalTopByDate_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "count" : "5" ,
             "startDate"  : "2021-01-01",
@@ -155,7 +159,7 @@
                 <td>8.The total amount of masks and dollar value of transactions that happened within a date range<p>
                     <textarea name="" id="sellTotalMaskTotalByDate_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "count" : "5" ,
             "startDate"  : "2021-01-01",
@@ -177,7 +181,7 @@
                 <td>9.Edit pharmacy name, mask name, and mask price<p>
                     <textarea name="" id="editPharmaciesAndMask_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "editType" : "mask" ,
             "uuid" : "a3b4a5d9-2a26-4dd0-8378-8cdc97f42005",
@@ -201,7 +205,7 @@
                 <td>10.Remove a mask product from a pharmacy given by mask name<p>
                     <textarea name="" id="deleteMask_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "pharmaciesUUID" : "22e4bf47-c2c9-4cd9-b11f-93f8ebac89b6" ,
             "maskName" : "AniMask (blue) (10 per pack)"
@@ -220,9 +224,9 @@
             </tr>
             <tr>
                 <td>11.Process a user purchases a mask from a pharmacy, and handle all relevant data changes in an atomic transaction<p>
-                    <textarea name="" id="deleteMask_json" cols="30" rows="10">
+                    <textarea name="" id="userBuyMask_json" cols="30" rows="10">
 {
-    "token": "{{TOKEN}}",
+    "token": "{ TOKEN }",
     "data":{
             "userUUID" : "11dedce9-1551-455e-9bc4-0e15f78b90ee" ,
             "maskUUID"  : "feda033f-fa63-445d-826b-5d191604c82c"
@@ -231,12 +235,12 @@
                     </textarea>
                 </td>
                 <td>
-                    <pre id='deleteMask_response'>
+                    <pre id='userBuyMask_response'>
 
                     </pre>
                 </td>
                 <td>
-                    <input type="button" value="deleteMask" class="send_bt"><br>
+                    <input type="button" value="userBuyMask" class="send_bt"><br>
                 </td>
             </tr>
         </tbody>
@@ -277,7 +281,7 @@ $(".send_bt").click(function (e) {
 
 $("#login").click(function (e) {
     $.ajax({
-    url: 'http://127.0.0.1/phantom_mask/src/html/api/login/index.php',
+    url: '{host}/phantom_mask/src/html/api/login/index.php',
     type: 'POST',
     dataType: 'json',
     async: false,
@@ -295,7 +299,7 @@ $("#login").click(function (e) {
         }
     })
     .fail(function() {
-        alert('發生錯誤');
+        alert('ERROR');
     });
 });
 
