@@ -26,7 +26,7 @@
                     <pre id='login_response'>
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="login" class="send_bt"><br>
                 </td>
             </tr>
@@ -34,7 +34,7 @@
                 <td>2. List all pharmacies that are open at a certain datetime<p>
                     <textarea name="" id="openingByDateTime_json" cols="30" rows="10">
 {
-    "token": "1YqCxzvO0sBRMGjGQjx81KTKa54z40tqBy0_-UhIvss",
+    "token": "{ TOKEN }",
     "data":{
             "dateTime" : "2021-02-07 12:12:20"
     }
@@ -46,7 +46,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="openingByDateTime" class="send_bt"><br>
                 </td>
             </tr>
@@ -66,7 +66,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="openingByWeekday" class="send_bt"><br>
                 </td>
             </tr>
@@ -87,7 +87,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="maskItemByPharmacies" class="send_bt"><br>
                 </td>
             </tr>
@@ -108,7 +108,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="maskPharmaciesByPriceRange" class="send_bt"><br>
                 </td>
             </tr>
@@ -129,7 +129,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="searchMaskPharmacies" class="send_bt"><br>
                 </td>
             </tr>
@@ -151,7 +151,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="sellTotalTopByDate" class="send_bt"><br>
                 </td>
             </tr>
@@ -173,7 +173,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="sellTotalMaskTotalByDate" class="send_bt"><br>
                 </td>
             </tr>
@@ -197,7 +197,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="editPharmaciesAndMask" class="send_bt"><br>
                 </td>
             </tr>
@@ -218,7 +218,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="deleteMask" class="send_bt"><br>
                 </td>
             </tr>
@@ -239,7 +239,7 @@
 
                     </pre>
                 </td>
-                <td>
+                <td align="center">
                     <input type="button" value="userBuyMask" class="send_bt"><br>
                 </td>
             </tr>
@@ -265,13 +265,12 @@ $(".send_bt").click(function (e) {
     .done(function(result) {
         var j= JSON.stringify(result,undefined,4)
         $("#"+action+"_response").text(j);
-        if(result.error){
-            //alert(result.msg);
-        }else{
-            var data = result.data
-            var token = data.token
-            $.cookie('token', token);
-        }
+        // if(result.error){
+        //     alert(result.msg);
+        // }else{
+        //     var data = result.data
+        //     var token = data.token
+        // }
     })
     .fail(function() {
         alert('發生錯誤');
