@@ -13,8 +13,8 @@ class db_lib {
         $user = isset($data_base['username'])?$data_base['username']:'';
         $passwd = isset($data_base['password'])?$data_base['password']:'';
         $database = isset($data_base['database'])?$data_base['database']:'';
-        $ini_list['database'] = "mysql:host=mysql;";
-        $this->db = ADONewConnection('pdo');
+
+        $this->db = ADONewConnection('mysqli');
         $this->db->setCharset('utf8');
         $this->db->Connect($host,$user,$passwd,$database);
         $this->db->SetFetchMode(ADODB_FETCH_ASSOC);

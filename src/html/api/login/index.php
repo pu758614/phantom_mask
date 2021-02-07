@@ -56,8 +56,7 @@ function check_sort_data($data){
         $return['msg'] = '缺少login_name';
         return $return;
     }
-
-    if(!$data['login_name']=='kdan'){
+    if($data['login_name'] != 'kdan'){
         $return['msg'] = '錯誤的login_name';
         return $return;
     }
