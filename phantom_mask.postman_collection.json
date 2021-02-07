@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "d154c1f4-e453-4704-9a6a-c0fc9a4830c9",
+		"name": "phantom_mask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "094fe39f-f74a-471d-b24a-5b6669c5b0ae",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f6e8bf57-7d32-4b55-8344-a01a865fd9f6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"login_name\":\"kdan\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/login/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"login",
+						"index.php"
+					]
+				},
+				"description": "1.LOGIN"
+			},
+			"response": []
+		},
+		{
+			"name": "openingByDateTime",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"dateTime\" : \"2021-02-07 12:12:20\" \r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/openingByDateTime/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"openingByDateTime",
+						"index.php"
+					]
+				},
+				"description": "2.List all pharmacies that are open at a certain datetime"
+			},
+			"response": []
+		},
+		{
+			"name": "openingByWeekday",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"weekDay\" : \"Mon\" \r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/openingByWeekday/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"openingByWeekday",
+						"index.php"
+					]
+				},
+				"description": "3.List all pharmacies that are open on a day of the week, at a certain time"
+			},
+			"response": []
+		},
+		{
+			"name": "maskItemByPharmacies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"pharmaciesUUID\" : \"1adc6ab2-afbe-4428-a7e5-ca28c593969b\" ,\r\n         \"sort\"  : \"name\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/maskItemByPharmacies/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"maskItemByPharmacies",
+						"index.php"
+					]
+				},
+				"description": "4.List all masks that are sold by a given pharmacy, sorted by mask name or mask price"
+			},
+			"response": []
+		},
+		{
+			"name": "maskPharmaciesByPriceRange",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"minPrice\" : \"20\" ,\r\n         \"maxPrice\"  : \"30\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/maskPharmaciesByPriceRange/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"maskPharmaciesByPriceRange",
+						"index.php"
+					]
+				},
+				"description": "5.List all pharmacies that have more or less than x mask products within a price range"
+			},
+			"response": []
+		},
+		{
+			"name": "searchMaskPharmacies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"condition\" : \"mask\" ,\r\n         \"keyword\"  : \"Ani\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/searchMaskPharmacies/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"searchMaskPharmacies",
+						"index.php"
+					]
+				},
+				"description": "6.Search for pharmacies or masks by name, ranked by relevance to search term"
+			},
+			"response": []
+		},
+		{
+			"name": "sellTotalTopByDate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"count\" : \"5\" ,\r\n         \"startDate\"  : \"2021-01-01\",\r\n         \"endDate\"  : \"2021-11-30\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/sellTotalTopByDate/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"sellTotalTopByDate",
+						"index.php"
+					]
+				},
+				"description": "7.The top x users by total transaction amount of masks within a date range"
+			},
+			"response": []
+		},
+		{
+			"name": "sellTotalMaskTotalByDate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"startDate\"  : \"2021-01-01\",\r\n         \"endDate\"  : \"2021-01-10\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/sellTotalMaskTotalByDate/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"sellTotalMaskTotalByDate",
+						"index.php"
+					]
+				},
+				"description": "8.The total amount of masks and dollar value of transactions that happened within a date range"
+			},
+			"response": []
+		},
+		{
+			"name": "editPharmaciesAndMask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"editType\" : \"mask\" ,\r\n         \"uuid\" : \"a3b4a5d9-2a26-4dd0-8378-8cdc97f42005\",\r\n         \"editData\"  : {\r\n             \"name\" : \"Pill Pack12\"\r\n         }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/editPharmaciesAndMask/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"editPharmaciesAndMask",
+						"index.php"
+					]
+				},
+				"description": "9.Edit pharmacy name, mask name, and mask price"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"pharmaciesUUID\" : \"22e4bf47-c2c9-4cd9-b11f-93f8ebac89b6\" ,\r\n         \"maskName\" : \"AniMask (blue) (10 per pack)\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/deleteMask/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"deleteMask",
+						"index.php"
+					]
+				},
+				"description": "10.Remove a mask product from a pharmacy given by mask name"
+			},
+			"response": []
+		},
+		{
+			"name": "userBuyMask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"userUUID\" : \"11dedce9-1551-455e-9bc4-0e15f78b90ee\" ,\r\n         \"maskUUID\"  : \"feda033f-fa63-445d-826b-5d191604c82c\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}phantom_mask/api/userBuyMask/index.php",
+					"host": [
+						"{{HOST}}phantom_mask"
+					],
+					"path": [
+						"api",
+						"userBuyMask",
+						"index.php"
+					]
+				},
+				"description": "11.Process a user purchases a mask from a pharmacy, and handle all relevant data changes in an atomic transaction"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "bab50a9a-3e61-4108-8fe1-078274ec3c1f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "92da2f82-b93f-477e-a35e-150b76067fc3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a6c35c86-6e79-4075-a4ca-036d9ffcfa2f",
+			"key": "HOST",
+			"value": "http://127.0.0.1/"
+		},
+		{
+			"id": "7869f95a-09ff-498b-a2a0-cce962e2d98f",
+			"key": "TOKEN",
+			"value": "1YqCxzvO0sBWXlCWYqrbHUfomYj3NNczBy0_-UhIvss"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
