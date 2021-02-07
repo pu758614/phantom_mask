@@ -249,9 +249,17 @@ class db_lib {
         if(is_array($request)){
             $request = json_encode($request,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
+        $ip = '';
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip= $_SERVER['REMOTE_ADDR'];
+        }
         $data =array(
             'action'     => $action,
-            'ip'         => $_SERVER['REMOTE_ADDR'],
+            'ip'         => $ip,
             'request'    => $request,
             'response'   => $response,
             'status'     => $status,
