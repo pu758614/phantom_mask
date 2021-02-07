@@ -1,11 +1,12 @@
 <?php
-ini_set('display_errors','1');
+//ini_set('display_errors','1');
 $ini_list = parse_ini_file(__DIR__.'/../conf.ini', true, INI_SCANNER_RAW);
 $data_base = isset($ini_list['system'])?$ini_list['system']:array();
 $ROOT_PATH = isset($data_base['root_path'])?$data_base['root_path']:'';
 $TOKEN_TIME = isset($data_base['token_time'])?$data_base['token_time']:'';
 $data_base = isset($ini_list['database'])?$ini_list['database']:array();
 $host      = isset($data_base['host'])?$data_base['host']:'';
+$domain      = isset($data_base['domain '])?$data_base['domain']:'';
 
 
 function checkToken($token){

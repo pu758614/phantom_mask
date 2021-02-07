@@ -256,7 +256,7 @@ $(".send_bt").click(function (e) {
     $("#"+action+"_response").text('');
 
     $.ajax({
-    url: 'http://127.0.0.1/phantom_mask/src/html/api/'+action+'/index.php',
+    url: '{domain}/phantom_mask/src/html/api/'+action+'/index.php',
     type: 'POST',
     dataType: 'json',
     async: false,
