@@ -2,7 +2,7 @@
 ## API Document (required)
 ### 1. LOGIN
 ##### POST URL
-  `https://bibleline2.herokuapp.com/phantom_mask/api/login/index.php`
+  `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/login/index.php`
 ##### Request json
 ```json
 {"login_name":"kdan"}
@@ -26,7 +26,8 @@
 
   ### 2. List all pharmacies that are open at a certain datetime
 ##### POST URL
-  `https://bibleline2.herokuapp.com/phantom_mask/api/openingByDateTime/index.php`
+  `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/openingByDateTime/index.php`
+
 ##### Request
    ```json
 {
@@ -70,7 +71,7 @@
 
   ### 3. List all pharmacies that are open on a day of the week, at a certain time
 ##### POST URL
-  `https://bibleline2.herokuapp.com/phantom_mask/api/openingByWeekday/index.php`
+  `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/openingByWeekday/index.php`
 ##### Request json
    ```json
 {
@@ -110,7 +111,7 @@
 ```
 ### 4. List all masks that are sold by a given pharmacy, sorted by mask name or mask price
 ##### POST URL:
-  `https://bibleline2.herokuapp.com/phantom_mask/api/maskItemByPharmacies/index.php`
+  `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/maskItemByPharmacies/index.php`
 ##### Request json
    ```json
 {
@@ -160,7 +161,7 @@
 
 ### 5. List all pharmacies that have more or less than x mask products within a price range
 ##### POST URL:
-  `https://bibleline2.herokuapp.com/phantom_mask/api/maskPharmaciesByPriceRange/index.php`
+  `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/maskPharmaciesByPriceRange/index.php`
 ##### Request json
 ```json
 {
@@ -222,7 +223,7 @@
 
 ### 6. Search for pharmacies or masks by name, ranked by relevance to search term
   ##### POST URL:
-  `https://bibleline2.herokuapp.com/phantom_mask/api/searchMaskPharmacies/index.php`
+  `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/searchMaskPharmacies/index.php`
    ##### Request json
    ```json
 {
@@ -288,7 +289,7 @@ condition is pharmacies:
 
 ### 7.The top x users by total transaction amount of masks within a date range
   ##### POST URL:
-  `https://bibleline2.herokuapp.com/phantom_mask/api/sellTotalTopByDate/index.php`
+  `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/sellTotalTopByDate/index.php`
    ##### Request json
 ```json
 {
@@ -330,7 +331,7 @@ condition is pharmacies:
 
 ### 8. The total amount of masks and dollar value of transactions that happened within a date range
   ##### POST URL:
-`https://bibleline2.herokuapp.com/phantom_mask/api/sellTotalMaskTotalByDate/index.php`
+`http://bibleline2.herokuapp.com/phantom_mask/src/html/api/sellTotalMaskTotalByDate/index.php`
    ##### Request json
 ```json
 {
@@ -364,7 +365,7 @@ condition is pharmacies:
 
 ### 9. Edit pharmacy name, mask name, and mask price
   ##### POST URL
-`https://bibleline2.herokuapp.com/phantom_mask/api/editPharmaciesAndMask/index.php`
+`http://bibleline2.herokuapp.com/phantom_mask/src/html/api/editPharmaciesAndMask/index.php`
    ##### Request json
 ```json
 mask:
@@ -414,7 +415,7 @@ pharmacies:
 
 ### 10. Remove a mask product from a pharmacy given by mask name
   ##### POST URL:
-`https://bibleline2.herokuapp.com/phantom_mask/api/deleteMask/index.php`
+`http://bibleline2.herokuapp.com/phantom_mask/src/html/api/deleteMask/index.php`
    ##### Request json
 ```json
 {
@@ -442,7 +443,7 @@ pharmacies:
 
 ### 11. Process a user purchases a mask from a pharmacy, and handle all relevant data changes in an atomic transaction
   ##### POST URL:
-`https://bibleline2.herokuapp.com/phantom_mask/api/userBuyMask/index.php`
+`http://bibleline2.herokuapp.com/phantom_mask/src/html/api/userBuyMask/index.php`
    ##### Request json
 ```json
 {
@@ -470,11 +471,14 @@ pharmacies:
 
 
 ## Import Data Commands (required)
-  * `rake import:pharmacy[PATH_TO_FILE]`
-  * `rake import:user[PATH_TO_FILE]`
+   Create mysql data base table and import data command.
+
+  `sh ini_table_data.sh`
 
 ## Test Coverage Report(optional)
   check report [here](#test-coverage-reportoptional)
 
 ## Demo Site Url (optional)
-  demo ready on [heroku](#demo-site-url-optional)
+  [API Demo](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/)
+  [View user data](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/?action=user_data)
+  [View pharmacies data](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/?action=pharmacies_data)
