@@ -1,6 +1,5 @@
 build:
   docker:
     worker: PHP/Dockerfile
-    worker: mysql/Dockerfile
 run:
   web: bundle exec puma -C config/puma.rb
