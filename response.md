@@ -479,6 +479,6 @@ pharmacies:
   check report [here](#test-coverage-reportoptional)
 
 ## Demo Site Url (optional)
-  [API Demo](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/)
-  [View user data](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/?action=user_data)
-  [View pharmacies data](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/?action=pharmacies_data)
+  + [API Demo](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/)
+  + [View user data](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/?action=user_data)
+  + [View pharmacies data](http://bibleline2.herokuapp.com/phantom_mask/src/html/site/?action=pharmacies_data)
