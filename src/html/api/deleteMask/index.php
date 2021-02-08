@@ -16,7 +16,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = 'json formate';
+    $response_data['msg'] = 'Error json formate.';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
