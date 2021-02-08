@@ -15,7 +15,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -27,7 +27,7 @@ $data = isset($check_data['data'])?$check_data['data']:'';
 $opening_list = $db->getOpeningByDateTime($data['time']);
 $response_data['error'] = false;
 if(empty($opening_list)){
-    $response_data['msg'] = '無營業店家';
+    $response_data['msg'] = 'No opening phantom.';
 }else{
     $response_data['data'] = $opening_list;
 }
@@ -49,7 +49,7 @@ function check_sort_data($response){
         'data' => array(),
     );
     if(!isset($response['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -60,16 +60,16 @@ function check_sort_data($response){
     }
     $data = isset($response['data'])?$response['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['dateTime'])){
-        $return['msg'] = '缺少必要參數';
+        $return['msg'] = 'Lack dateTime';
         return $return;
     }
 
     if(!CheckDateTime($data['dateTime'])){
-        $return['msg'] = '日期時間格式錯誤';
+        $return['msg'] = 'Wrong dateTime';
         return $return;
     }
     $return['data'] = array(

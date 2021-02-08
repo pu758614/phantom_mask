@@ -16,7 +16,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'json formate';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -29,7 +29,7 @@ $data = isset($check_data['data'])?$check_data['data']:'';
 
 $pharmacies_data = $db->getSingleById('kdan_mask_pharmacies','uuid',$data['pharmaciesUUID']);
 if(empty($pharmacies_data)){
-    $response_data['msg'] = '無pharmaciesUUID資料';
+    $response_data['msg'] = 'NO pharmaciesUUID data.';
     goto end;
 }
 
@@ -40,7 +40,7 @@ $cond = array(
 );
 $mask_data = $db->getSingleByArray('kdan_mask_mask_item',$cond);
 if(empty($mask_data)){
-    $response_data['msg'] = $pharmacies_data['name'].'查無此Mask資料';
+    $response_data['msg'] = $pharmacies_data['name'].'No such mask data';
     goto end;
 }
 $cond = array(
@@ -52,11 +52,11 @@ $data = array(
 );
 $result = $db->updateData('kdan_mask_mask_item',$data,$cond);
 if($result){
-    $response_data['msg'] = "刪除成功";
+    $response_data['msg'] = "";
     $response_data['error'] = false;
     $api_status = 1;
 }else {
-    $response_data['msg'] = "更新失敗";
+    $response_data['msg'] = "update fail.";
 }
 
 
@@ -73,7 +73,7 @@ function check_sort_data($request){
         'data' => array(),
     );
     if(!isset($request['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack token';
         return $return;
     }
 
@@ -84,15 +84,15 @@ function check_sort_data($request){
     }
     $data = isset($request['data'])?$request['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data format';
         return $return;
     }
     if(!isset($data['pharmaciesUUID'])){
-        $return['msg'] = '缺少pharmaciesUUID';
+        $return['msg'] = 'Lack pharmaciesUUID';
         return $return;
     }
     if(!isset($data['maskName'])){
-        $return['msg'] = '缺少maskName';
+        $return['msg'] = 'Lack maskName';
         return $return;
     }
 

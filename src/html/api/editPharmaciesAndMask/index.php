@@ -16,7 +16,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -41,7 +41,7 @@ if($data['editType']=='pharmacies'){
 }
 $check_data = $db->getSingleByArray($table,$cond);
 if(empty($check_data)){
-    $response_data['msg'] = '無此uuid資料';
+    $response_data['msg'] = 'No such uuid data';
     goto end;
 }
 $editData = $data['editData'];
@@ -52,18 +52,18 @@ $cond = array(
 $result= $db->updateData($table,$editData,$cond);
 
 if(!$result || $db->db->ErrorMsg()!=''){
-    $response_data['msg'] = '更新失敗';
+    $response_data['msg'] = 'Update fail';
 }else{
     if($data['editType']=='mask'){
         if($db->updateMaskFullName($check_data['id'])){
-            $response_data['msg'] = '更新成功';
+            $response_data['msg'] = '';
             $response_data['error'] = false;
             $api_status = 1;
         }else{
-            $response_data['msg'] = '口罩名稱更新失敗';
+            $response_data['msg'] = 'Update fail';
         }
     }else{
-        $response_data['msg'] = '更新成功';
+        $response_data['msg'] = '';
         $response_data['error'] = false;
         $api_status = 1;
     }
@@ -82,7 +82,7 @@ function check_sort_data($request){
         'data' => array(),
     );
     if(!isset($request['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -93,27 +93,27 @@ function check_sort_data($request){
     }
     $data = isset($request['data'])?$request['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['editType'])){
-        $return['msg'] = '缺少count';
+        $return['msg'] = 'Lack of count';
         return $return;
     }
     if(!in_array($data['editType'],array('pharmacies','mask'))){
-        $return['msg'] = '錯誤的editType';
+        $return['msg'] = 'Wrong editType';
         return $return;
     }
     if(!isset($data['uuid']) || $data['uuid']==''){
-        $return['msg'] = '缺少uuid';
+        $return['msg'] = 'Lack of uuid';
         return $return;
     }
     if(!isset($data['editData'])){
-        $return['msg'] = '缺少editData';
+        $return['msg'] = 'Lack of editData.';
         return $return;
     }
     if(!is_array($data['editData'])){
-        $return['msg'] = '不正確的editData型態';
+        $return['msg'] = 'Wrong editData formate.';
         return $return;
     }
     $up_data = array();
@@ -125,19 +125,19 @@ function check_sort_data($request){
                 break;
             case 'price':
                 if($data['editType']=='pharmacies'){
-                    $return['msg'] = $key.'不是'.$data['editType'].'可以編輯的參數';
+                    $return['msg'] = $key." not undefined in".$data['editType'];
                     return $return;
                 }
                 $up_data[$key] = $value;
                 break;
             default:
-                $return['msg'] = $key.'不是'.$data['editType'].'可以編輯的參數';
+                $return['msg'] = $key." not undefined in".$data['editType'];
                 return $return;
                 break;
         }
     }
     if(empty($up_data)){
-        $return['msg'] = '缺少編輯內容';
+        $return['msg'] = 'Lack of edit content.';
         return $return;
     }
 

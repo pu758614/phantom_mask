@@ -1,5 +1,6 @@
 <?php
-//ini_set('display_errors','1');
+
+ini_set('display_errors','0');
 $ini_list = parse_ini_file(__DIR__.'/../conf.ini', true, INI_SCANNER_RAW);
 $data_base = isset($ini_list['system'])?$ini_list['system']:array();
 $ROOT_PATH = isset($data_base['root_path'])?$data_base['root_path']:'';
@@ -7,6 +8,7 @@ $TOKEN_TIME = isset($data_base['token_time'])?$data_base['token_time']:'';
 $data_base = isset($ini_list['database'])?$ini_list['database']:array();
 $host      = isset($data_base['host'])?$data_base['host']:'';
 $domain      = isset($data_base['domain '])?$data_base['domain']:'';
+include_once($ROOT_PATH."../../../prepend.php");
 
 
 function checkToken($token){
@@ -14,7 +16,7 @@ function checkToken($token){
     $token_arr = explode('_',$str);
     $return =  array(
         'error' => true,
-        'msg'   => '錯誤的token格式'
+        'msg'   => 'wrong token formate.'
     );
     if(!isset($token_arr[0])|| $token_arr[0]!='kdan'){
         return $return;
@@ -23,7 +25,7 @@ function checkToken($token){
         return $return;
     }
     if(date('Y-m-d H:i:s')>$token_arr[1]){
-        $return['msg'] = '此token已過期，請重新登入';
+        $return['msg'] = 'The token has expired, please log in again.';
         return $return;
     }
     return array(

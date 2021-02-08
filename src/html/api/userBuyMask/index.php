@@ -16,7 +16,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -39,12 +39,12 @@ $mask_cond = array(
 
 $mask_dsta = $db->getSingleByArray('kdan_mask_mask_item',$mask_cond);
 if(empty($mask_dsta)){
-    $response_data['msg'] = 'maskUUID查無資料';
+    $response_data['msg'] = 'maskUUID no data found';
     goto end;
 }
 $pharmacies_data = $db->getSingleById('kdan_mask_pharmacies','id',$mask_dsta['pharmaciesId']);
 if(empty($mask_dsta)){
-    $response_data['msg'] = '查無maskUUID對應pharmacies';
+    $response_data['msg'] = 'Pharmacies data no  found';
     goto end;
 }
 if($user_data['cashBalance']<$mask_dsta['price']){
@@ -90,7 +90,7 @@ $sell_record = array(
 );
 $result = $db->insertData('kdan_mask_sell_record',$sell_record);
 if(!$result){
-    $response_data['msg'] = 'record更新失敗';
+    $response_data['msg'] = 'update fail.';
     $db->db->rollbackTrans();
     goto end;
 }
@@ -112,7 +112,7 @@ function check_sort_data($request){
         'data' => array(),
     );
     if(!isset($request['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -123,15 +123,15 @@ function check_sort_data($request){
     }
     $data = isset($request['data'])?$request['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['userUUID'])){
-        $return['msg'] = '缺少userUUID';
+        $return['msg'] = 'Lack of userUUID';
         return $return;
     }
     if(!isset($data['maskUUID'])){
-        $return['msg'] = '缺少userUUID';
+        $return['msg'] = 'Lack of userUUID';
         return $return;
     }
 

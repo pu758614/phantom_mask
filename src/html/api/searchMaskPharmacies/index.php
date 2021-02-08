@@ -16,7 +16,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $request_arr['msg'] = '資料解析失敗';
+    $request_arr['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -30,7 +30,7 @@ $keyword = isset($data['keyword'])?trim($data['keyword']):'';
 $search_data= $db->searchMaskPharmacies($keyword,$data['condition']);
 
 if(empty($search_data)){
-    $response_data['msg'] = '無搜尋資料';
+    $response_data['msg'] = 'Not search data.';
 }else{
     $response_data['data'] = $search_data;
     $response_data['error'] = false;
@@ -50,7 +50,7 @@ function check_sort_data($request){
         'data' => array(),
     );
     if(!isset($request['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -61,16 +61,16 @@ function check_sort_data($request){
     }
     $data = isset($request['data'])?$request['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['keyword']) || trim($data['keyword']) == ''){
-        $return['msg'] = '缺少keyword';
+        $return['msg'] = 'Lack of keyword';
         return $return;
     }
 
     if(!in_array($data['condition'],array('mask','pharmacies'))){
-        $return['msg'] = '錯誤的搜尋條件';
+        $return['msg'] = 'Wrong search condition.';
         return $return;
     }
 

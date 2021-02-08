@@ -16,7 +16,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -30,7 +30,7 @@ $data = isset($check_data['data'])?$check_data['data']:'';
 $get_data= $db->sellTotalTopByDate($data['count'],$data['startDate'],$data['endDate']);
 
 if(empty($get_data)){
-    $response_data['msg'] = '無搜尋資料';
+    $response_data['msg'] = 'Not search data.';
 }else{
     $response_data['data'] = $get_data;
     $response_data['error'] = false;
@@ -50,7 +50,7 @@ function check_sort_data($request){
         'data' => array(),
     );
     if(!isset($request['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -61,7 +61,7 @@ function check_sort_data($request){
     }
     $data = isset($request['data'])?$request['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['count'])){
@@ -69,24 +69,24 @@ function check_sort_data($request){
         return $return;
     }
     if(!is_numeric($data['count'])){
-        $return['msg'] = 'count須為數字';
+        $return['msg'] = 'count must be a number';
         return $return;
     }
 
     if(!isset($data['startDate'])){
-        $return['msg'] = '缺少startDate';
+        $return['msg'] = 'Lack of startDate';
         return $return;
     }
     if(!CheckDateTime($data['startDate'])){
-        $return['msg'] = '不正確的startDate格式';
+        $return['msg'] = 'Wrong startDate formate';
         return $return;
     }
     if(!isset($data['endDate'])){
-        $return['msg'] = '缺少startDate';
+        $return['msg'] = 'Lack of startDate';
         return $return;
     }
     if(!CheckDateTime($data['endDate'])){
-        $return['msg'] = '不正確的startDate格式';
+        $return['msg'] = 'Wrong startDate formate.';
         return $return;
     }
 

@@ -17,7 +17,7 @@ $db = new db_lib();
 $response_data = file_get_contents("php://input");
 $response_arr = json_decode($response_data,'true');
 if(!is_array($response_arr)){
-    $request_data['msg'] = '資料解析失敗';
+    $request_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($response_arr);
@@ -53,11 +53,11 @@ function check_sort_data($data){
     );
 
     if(!isset($data['login_name'])){
-        $return['msg'] = '缺少login_name';
+        $return['msg'] = 'Lack of login_name';
         return $return;
     }
     if($data['login_name'] != 'kdan'){
-        $return['msg'] = '錯誤的login_name';
+        $return['msg'] = 'Wrong login_name';
         return $return;
     }
     $return['error'] = false;

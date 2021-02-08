@@ -15,7 +15,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -51,7 +51,7 @@ function check_sort_data($response){
         'data' => array(),
     );
     if(!isset($response['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -62,19 +62,19 @@ function check_sort_data($response){
     }
     $data = isset($response['data'])?$response['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['minPrice']) && !isset($data['maxPrice'])){
-        $return['msg'] = '缺少必要參數';
+        $return['msg'] = 'Lack of minPrice';
         return $return;
     }
     if(isset($data['minPrice']) && (!is_numeric($data['minPrice']) || $data['minPrice']<0)){
-        $return['msg'] = 'minPrice必須為正數';
+        $return['msg'] = '"minPrice" must be a number greater than zero.';
         return $return;
     }
     if(isset($data['maxPrice']) && (!is_numeric($data['maxPrice']) || $data['maxPrice']<0)){
-        $return['msg'] = 'maxPrice必須為正數';
+        $return['msg'] = 'maxPrice must be a number greater than zero.';
         return $return;
     }
     if( isset($data['minPrice']) && isset($data['minPrice']) ){
@@ -82,7 +82,7 @@ function check_sort_data($response){
         ($data['maxPrice']!=0) &&
         ($data['maxPrice']<$data['minPrice'])
         ){
-            $return['msg'] = 'maxPrice必須大於或等於minPrice';
+            $return['msg'] = 'maxPrice must be greater than or equal to minPrice';
             return $return;
         }
     }
@@ -90,7 +90,7 @@ function check_sort_data($response){
     $maxPrice = isset($data['maxPrice'])?$data['maxPrice']:'';
 
     if($minPrice===0 && $maxPrice===0){
-        $return['msg'] = '未填寫金額範圍';
+        $return['msg'] = 'Missing price range.';
         return $return;
     }
     $return['data'] = array(

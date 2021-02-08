@@ -15,7 +15,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -27,7 +27,7 @@ $data = isset($check_data['data'])?$check_data['data']:'';
 $opening_list = $db->getOpeningByWeekDay($data['weekDay']);
 $response_data['error'] = false;
 if(empty($opening_list)){
-    $response_data['msg'] = '無營業店家';
+    $response_data['msg'] = 'No opening phantom.';
 }else{
     $response_data['data'] = $opening_list;
 }
@@ -49,7 +49,7 @@ function check_sort_data($response){
         'data' => array(),
     );
     if(!isset($response['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -60,15 +60,15 @@ function check_sort_data($response){
     }
     $data = isset($response['data'])?$response['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['weekDay'])){
-        $return['msg'] = '缺少必要參數';
+        $return['msg'] = 'Lack of weekDay.';
         return $return;
     }
     if(!in_array($data['weekDay'],array('Mon','Tue','Wed','Thu','Fri','Sat','Sun'))){
-        $return['msg'] = '錯誤的日期名稱';
+        $return['msg'] = 'Wrong weekDay';
         return $return;
     }
     $return['data'] = array(

@@ -15,7 +15,7 @@ $db = new db_lib();
 $request_data = file_get_contents("php://input");
 $request_arr = json_decode($request_data,'true');
 if(!is_array($request_arr)){
-    $response_data['msg'] = '資料解析失敗';
+    $response_data['msg'] = 'Error json format';
     goto end;
 }
 $check_data = check_sort_data($request_arr);
@@ -27,7 +27,7 @@ if($check_data['error']){
 $data = isset($check_data['data'])?$check_data['data']:array();
 $pharmacies_data = $db->getSingleById('kdan_mask_pharmacies','uuid',$data['pharmaciesUUID']);
 if(empty($pharmacies_data)){
-    $response_data['msg'] = '錯誤的pharmaciesUUID';
+    $response_data['msg'] = 'Error pharmaciesUUID';
     goto end;
 }
 
@@ -51,7 +51,7 @@ foreach ($mask_list as $mask_data) {
 
 $response_data['error'] = false;
 if(empty($data_list)){
-    $response_data['msg'] = '此藥局無口罩資料';
+    $response_data['msg'] = 'This pharmacy has no mask data.';
 }else{
     $response_data['data'] = $data_list;
 }
@@ -73,7 +73,7 @@ function check_sort_data($response){
         'data' => array(),
     );
     if(!isset($response['token'])){
-        $return['msg'] = '缺少token';
+        $return['msg'] = 'Lack of food';
         return $return;
     }
 
@@ -84,17 +84,17 @@ function check_sort_data($response){
     }
     $data = isset($response['data'])?$response['data']:array();
     if(empty($data)){
-        $return['msg'] = '錯誤的data格式';
+        $return['msg'] = 'Error data formate.';
         return $return;
     }
     if(!isset($data['pharmaciesUUID']) && !isset($data['pharmaciesUUID'])){
-        $return['msg'] = '缺少必要參數';
+        $return['msg'] = 'Lack of pharmaciesUUID';
         return $return;
     }
 
     $sort = isset($data['sort'])?$data['sort']:'';
     if($sort!='' && $sort!='name' && $sort!='price'){
-        $return['msg'] = '錯誤的排序條件';
+        $return['msg'] = '"sort" is error.';
         return $return;
     }
 
