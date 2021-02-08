@@ -21,11 +21,11 @@ if($rs && $rs->RecordCount() > 0){
         foreach ($mask_arr as $key => $mask_data) {
             $tpl->newBlock('MASK_LIST');
             $tpl->assign(array(
-                'mask_name'    => $mask_data['name'],
-                'mask_color'    => $mask_data['color'],
-                'mask_per' => $mask_data['per'],
-                'mask_price'    => $mask_data['price'],
-                'uuid' => $mask_data['uuid']
+                'mask_name'  => $mask_data['fullName'],
+                'mask_color' => $mask_data['color'],
+                'mask_per'   => $mask_data['per'],
+                'mask_price' => $mask_data['price'],
+                'uuid'       => $mask_data['uuid']
             ));
         }
         $sell_arr = isset($sell_all[$value['id']])?$sell_all[$value['id']]:array();

@@ -41,7 +41,7 @@ class db_lib {
         if($rs && $rs->RecordCount() > 0){
             foreach ($rs as  $value) {
                 $sort_arr[$value[$type.'Id']][] = array(
-                    "name"       => $value['maskName']." (".$value['color'].") "."(".$value['per']." per)",
+                    "name"       => $value['maskName']." (".$value['color'].") "."(".$value['per']." per pack)",
                     "pharmacies" => $value['pharmaciesName'],
                     "amounts"    => $value['sellAmount'],
                     "time"       => $value['sellDate']
