@@ -11,7 +11,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "094fe39f-f74a-471d-b24a-5b6669c5b0ae",
 						"exec": [
 							""
 						],
@@ -21,7 +20,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f6e8bf57-7d32-4b55-8344-a01a865fd9f6",
 						"exec": [
 							""
 						],
@@ -42,9 +40,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/login/index.php",
+					"raw": "{{HOST}}/api/login/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -63,7 +61,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"dateTime\" : \"2021-02-07 12:12:20\" \r\n    }\r\n}",
+					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"dateTime\" : \"2021-02-01 12:12:20\" \r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,9 +69,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/openingByDateTime/index.php",
+					"raw": "{{HOST}}/api/openingByDateTime/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -95,9 +93,9 @@
 					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"weekDay\" : \"Mon\" \r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/openingByWeekday/index.php",
+					"raw": "{{HOST}}/api/openingByWeekday/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -119,9 +117,9 @@
 					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"pharmaciesUUID\" : \"1adc6ab2-afbe-4428-a7e5-ca28c593969b\" ,\r\n         \"sort\"  : \"name\"\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/maskItemByPharmacies/index.php",
+					"raw": "{{HOST}}/api/maskItemByPharmacies/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -143,9 +141,9 @@
 					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"minPrice\" : \"20\" ,\r\n         \"maxPrice\"  : \"30\"\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/maskPharmaciesByPriceRange/index.php",
+					"raw": "{{HOST}}/api/maskPharmaciesByPriceRange/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -167,9 +165,9 @@
 					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"condition\" : \"mask\" ,\r\n         \"keyword\"  : \"Ani\"\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/searchMaskPharmacies/index.php",
+					"raw": "{{HOST}}/api/searchMaskPharmacies/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -191,9 +189,9 @@
 					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"count\" : \"5\" ,\r\n         \"startDate\"  : \"2021-01-01\",\r\n         \"endDate\"  : \"2021-11-30\"\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/sellTotalTopByDate/index.php",
+					"raw": "{{HOST}}/api/sellTotalTopByDate/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -215,9 +213,9 @@
 					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"startDate\"  : \"2021-01-01\",\r\n         \"endDate\"  : \"2021-01-10\"\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/sellTotalMaskTotalByDate/index.php",
+					"raw": "{{HOST}}/api/sellTotalMaskTotalByDate/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -244,9 +242,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/editPharmaciesAndMask/index.php",
+					"raw": "{{HOST}}/api/editPharmaciesAndMask/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -273,9 +271,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/deleteMask/index.php",
+					"raw": "{{HOST}}/api/deleteMask/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -297,9 +295,9 @@
 					"raw": "{\r\n    \"token\": \"{{TOKEN}}\",\r\n    \"data\":{\r\n         \"userUUID\" : \"11dedce9-1551-455e-9bc4-0e15f78b90ee\" ,\r\n         \"maskUUID\"  : \"feda033f-fa63-445d-826b-5d191604c82c\"\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "{{HOST}}phantom_mask/api/userBuyMask/index.php",
+					"raw": "{{HOST}}/api/userBuyMask/index.php",
 					"host": [
-						"{{HOST}}phantom_mask"
+						"{{HOST}}"
 					],
 					"path": [
 						"api",
@@ -316,7 +314,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "bab50a9a-3e61-4108-8fe1-078274ec3c1f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -326,7 +323,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "92da2f82-b93f-477e-a35e-150b76067fc3",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -336,15 +332,22 @@
 	],
 	"variable": [
 		{
-			"id": "a6c35c86-6e79-4075-a4ca-036d9ffcfa2f",
 			"key": "HOST",
-			"value": "http://127.0.0.1/"
+			"value": "http://localhost:8000/",
+			"disabled": true
 		},
 		{
-			"id": "7869f95a-09ff-498b-a2a0-cce962e2d98f",
 			"key": "TOKEN",
-			"value": "1YqCxzvO0sBWXlCWYqrbHUfomYj3NNczBy0_-UhIvss"
+			"value": "1YqCxzvO0sAiTfYZJudvgZVUPH6l5DzxBy0_-UhIvss"
+		},
+		{
+			"key": "HOST",
+			"value": "http://127.0.0.1/phantom_mask/src/html",
+			"disabled": true
+		},
+		{
+			"key": "HOST",
+			"value": "http://bibleline2.herokuapp.com/"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
