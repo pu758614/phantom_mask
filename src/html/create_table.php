@@ -1,4 +1,4 @@
-<?
+<?php
 include_once(dirname(__DIR__)."/html/lib/common.php");
 include_once("$ROOT_PATH/lib/db_lib.php");
 
