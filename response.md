@@ -1,5 +1,6 @@
 # Response
 ## API Document (required)
+######Import the POSTMAN json file [here](https://github.com/pu758614/phantom_mask/blob/master/phantom_mask.postman_collection.json)
 ### 1. LOGIN
 ##### POST URL
   `http://bibleline2.herokuapp.com/phantom_mask/src/html/api/login/index.php`
@@ -408,7 +409,7 @@ pharmacies:
 ```json
 {
     "error": false,
-    "msg": "Update finish."
+    "msg": ""
 }
 ```
 
@@ -437,7 +438,7 @@ pharmacies:
 ```json
 {
     "error": false,
-    "msg": "Delete finish."
+    "msg": ""
 }
 ```
 
@@ -465,13 +466,13 @@ pharmacies:
 ```json
 {
     "error": false,
-    "msg": "Transaction finish"
+    "msg": ""
 }
 ```
 
 
 ## Import Data Commands (required)
-   Create mysql data base table and import data command.
+   Create mysql data base table and import data command,database settings must be set in [conf.ini](https://github.com/pu758614/phantom_mask/blob/master/src/html/conf.ini) first.
 
   `sh ini_table_data.sh`
 
