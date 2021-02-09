@@ -474,7 +474,7 @@ pharmacies:
 ## Import Data Commands (required)
    Create mysql data base table and import data command,database settings must be set in [conf.ini](https://github.com/pu758614/phantom_mask/blob/master/src/html/conf.ini) first.
 
-  `sh ini_table_data.sh`
+  `sh src/html/ini_table_data.sh`
 
 ## Test Coverage Report(optional)
   check report [here](#test-coverage-reportoptional)
