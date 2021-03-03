@@ -8,7 +8,7 @@ $TOKEN_TIME = isset($data_base['token_time'])?$data_base['token_time']:'';
 $data_base = isset($ini_list['database'])?$ini_list['database']:array();
 $host      = isset($data_base['host'])?$data_base['host']:'';
 $domain      = isset($data_base['domain '])?$data_base['domain']:'';
-include_once($ROOT_PATH."../../../prepend.php");
+//include_once($ROOT_PATH."../../../prepend.php");
 
 
 function checkToken($token){
